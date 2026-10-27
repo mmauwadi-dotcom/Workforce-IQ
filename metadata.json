@@ -1,0 +1,6 @@
+{
+  "name": "WorkforceIQ",
+  "description": "AI-Powered Workforce Monitoring & Enterprise Business Analytics Platform with automated SQL generation, dynamic dashboards, and deep intelligence.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

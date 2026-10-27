@@ -1,0 +1,625 @@
+# MASTER PROMPT: DESIGN AND BUILD A WORKFORCE MONITORING & AI ANALYTICS APPLICATION
+
+## 1. ROLE AND OBJECTIVE
+
+Act as a senior software engineer, full-stack developer, UI/UX designer, data analyst, SQL developer, and AI application architect.
+
+Design and build a fully functional, AI-powered workforce monitoring and business analytics web application called **WorkforceIQ**.
+
+The application must allow users to upload datasets, define business objectives or problems, automatically analyse the uploaded data, generate SQL queries, create interactive dashboards, identify trends and anomalies, and ask questions through an integrated AI analytics agent.
+
+The application must not be limited to HR or workforce data. It must support different types of structured business datasets, including HR, finance, sales, operations, customer service, procurement, inventory, project management, and other business data.
+
+The goal is to provide a simple analytics workspace where users can move from raw data to actionable business insights without manually building queries, writing code, or designing dashboards.
+
+Build the actual working application, not just a visual prototype or static dashboard.
+
+## 2. DESIGN PHILOSOPHY AND USER INTERFACE
+
+Use a clean, minimal, professional enterprise SaaS design.
+
+### Colour palette
+- Primary background: White (#FFFFFF).
+- Primary text: Black or near-black (#111827).
+- Primary accent: Professional blue (#2563EB).
+- Secondary text: Neutral dark grey (#4B5563).
+- Borders and dividers: Light grey (#E5E7EB).
+- Cards: White with subtle borders and minimal shadows.
+- Charts: Professional shades of blue, supported by neutral grey and black.
+
+Do not use dark mode, gradients, excessive colours, unnecessary animations, decorative illustrations, or distracting visual effects.
+
+### Typography
+Use a clean sans-serif font such as Inter or a similar modern enterprise font.
+
+### Layout
+Create a responsive desktop-first interface that adapts to tablets and mobile screens.
+
+Use a simple left-hand navigation sidebar, a compact top navigation bar, and a spacious main content area.
+
+The sidebar should contain only these sections:
+
+1. Overview
+2. Data Workspace
+3. Dashboards
+4. SQL Query Lab
+5. AI Data Analyst
+6. Data History
+7. Settings
+
+Use clear icons, short labels, consistent spacing, and straightforward navigation.
+
+The application must prioritise usability, readability, and useful information over decorative elements.
+
+## 3. OVERVIEW PAGE
+
+Create a landing page that introduces the user to the analytics workspace.
+
+Display the following:
+
+- A welcome heading: "Welcome to WorkforceIQ".
+- A short subtitle: "Turn your business data into actionable insights."
+- A prominent "Upload Dataset" button.
+- A text field for describing a business objective or problem.
+- A "Generate Analysis" button.
+- A list of recently analysed datasets.
+- A section showing recent analysis results, where available.
+
+When no dataset has been uploaded, display a simple empty state explaining that the user should upload a file to begin.
+
+Do not display fabricated KPIs, sample business results, or invented historical analyses as if they were real.
+
+## 4. DATA UPLOAD AND PROCESSING ENGINE
+
+Build a functional data upload interface that supports the following file formats:
+
+- Excel (.xlsx and .xls)
+- CSV (.csv)
+- JSON (.json)
+- Parquet (.parquet), where supported by the implementation.
+
+Allow users to upload one or more files, subject to configurable file-size and processing limits.
+
+For Excel files, allow users to select a worksheet when a workbook contains multiple sheets.
+
+For CSV files, automatically detect delimiters and encoding where possible.
+
+For JSON files, support structured records and arrays of objects.
+
+For every uploaded file, perform the following operations:
+
+1. Read and parse the file.
+2. Identify column names and data types.
+3. Detect dates, numbers, currencies, percentages, categories, identifiers, and text fields.
+4. Determine the number of rows and columns.
+5. Display a preview of the first 10–20 rows.
+6. Identify blank values, duplicate records, inconsistent formats, and potential data quality issues.
+7. Detect potential primary keys and relationships between tables where possible.
+8. Generate a data dictionary containing each column name, inferred data type, and a short description where reasonably inferable.
+9. Display a summary of the dataset before analysis begins.
+10. Allow users to select or exclude columns from analysis without modifying the original uploaded file.
+
+Include an option to upload additional datasets for combined analysis.
+
+When multiple datasets are uploaded, identify potential relationships between them using common identifiers, matching columns, and compatible data types.
+
+Never join datasets automatically when the relationship is ambiguous. Explain the proposed join and allow the user to confirm it.
+
+Provide a clear error message when a file cannot be processed. Never silently discard rows or columns.
+
+Do not claim to support a file format unless the corresponding parser has actually been implemented.
+
+## 5. BUSINESS OBJECTIVE AND PROBLEM DEFINITION
+
+Before generating an analysis, provide a text area labelled:
+
+"Describe your business objective or problem."
+
+The user should be able to explain what they want to investigate in natural language.
+
+Examples:
+
+- Analyse employee attrition and identify the departments with the highest turnover.
+- Compare departmental performance against established targets.
+- Identify the main drivers of declining sales revenue.
+- Analyse monthly expenses and identify opportunities for cost reduction.
+- Monitor recruitment performance, time-to-hire, and vacancy fulfilment.
+- Identify customer cancellation and no-show trends.
+- Analyse employee absenteeism and its relationship with performance.
+- Compare actual expenditure against budget.
+- Identify operational bottlenecks and unusual performance patterns.
+
+Also provide an optional field labelled "Key business questions" and an optional field for defining KPI targets, reporting periods, or business rules.
+
+The application must interpret the user's objective alongside the uploaded dataset.
+
+Before generating results, determine whether the required columns and information exist in the data.
+
+If critical information is missing, ask a concise clarifying question or explain the limitation. Do not invent missing data, KPI definitions, or business rules.
+
+The user should be able to select a reporting period, specify important filters, and regenerate the analysis when the objective changes.
+
+## 6. AI-POWERED DATA ANALYSIS ENGINE
+
+Implement an AI analysis workflow that automatically determines the most appropriate analytical approach for the uploaded dataset and business objective.
+
+The workflow should:
+
+1. Understand the business problem.
+2. Inspect the dataset schema and data dictionary.
+3. Validate the quality and suitability of the data.
+4. Identify relevant metrics and dimensions.
+5. Recommend suitable KPIs and explain their definitions.
+6. Generate the required SQL queries.
+7. Execute the queries against the available dataset using a suitable query engine.
+8. Validate the results and calculations.
+9. Generate an interactive dashboard.
+10. Produce a concise summary of findings.
+11. Identify trends, anomalies, risks, and potential opportunities.
+12. Recommend practical next steps supported by the evidence.
+
+The analysis must be specific to the actual uploaded data and the stated objective.
+
+Do not use the same fixed dashboard for every dataset.
+
+Adapt the metrics, visualisations, calculations, filters, and recommendations to the subject of the analysis.
+
+Where appropriate, distinguish between correlation and causation. Do not claim that one factor caused another unless the analysis supports that conclusion.
+
+## 7. AUTOMATIC DASHBOARD GENERATOR
+
+Create a dynamic dashboard generator that builds an appropriate dashboard immediately after the analysis has been completed.
+
+The dashboard must be generated from the actual data, the user's objective, and the results of validated calculations.
+
+### A. KPI cards
+
+Display the most relevant KPIs at the top of the dashboard.
+
+Examples include:
+
+For workforce analytics:
+- Total headcount.
+- Active employees.
+- Employee attrition rate.
+- Average tenure.
+- Absenteeism rate.
+- Recruitment performance.
+
+For financial analytics:
+- Total revenue.
+- Total expenditure.
+- Profit margin.
+- Budget variance.
+- Monthly cost trends.
+
+For sales analytics:
+- Total sales.
+- Revenue growth.
+- Conversion rate.
+- Average order value.
+- Sales by region or product.
+
+For operational analytics:
+- Productivity.
+- Service completion rate.
+- Delays.
+- Error rate.
+- Target achievement.
+
+These are examples, not mandatory KPIs for every dataset.
+
+Only display KPIs that can be calculated from the uploaded data and the applicable business definitions. If a metric cannot be calculated, explain why instead of displaying a fabricated value.
+
+### B. Interactive visualisations
+
+Automatically select suitable charts based on the data and analytical objective.
+
+Use:
+- Line charts for time-series trends.
+- Bar charts for category comparisons.
+- Stacked bars for composition across categories.
+- Pie or doughnut charts only for simple part-to-whole comparisons with a small number of categories.
+- Histograms for distributions.
+- Scatter plots for relationships between numeric variables.
+- Tables for detailed records and ranked results.
+- Waterfall charts for supported financial bridges or variance analysis.
+
+Every chart must have a meaningful title, readable labels, appropriate units, and accurate values.
+
+Avoid unnecessary charts and redundant visualisations.
+
+### C. Dashboard filters
+
+Generate relevant interactive filters based on available columns.
+
+Examples include:
+- Date or reporting period.
+- Department.
+- Location.
+- Employee status.
+- Job role.
+- Business unit.
+- Product category.
+- Region.
+- Customer segment.
+
+Filters must be dataset-aware.
+
+When a filter is changed, update all dependent KPI cards, charts, and tables consistently.
+
+Include a search function where appropriate and provide a clear option to reset filters.
+
+### D. Dashboard interactions
+
+Allow users to:
+- Hover over charts to view exact values.
+- Click chart categories to filter or drill down where appropriate.
+- Sort and search tables.
+- Change the reporting period.
+- Refresh the analysis.
+- Regenerate the dashboard.
+- Export dashboard data and analysis results.
+
+Ensure that all visualisations display actual calculated results rather than hardcoded placeholder values.
+
+## 8. SQL QUERY GENERATION AND SQL QUERY LAB
+
+Create a dedicated section called "SQL Query Lab".
+
+The AI should generate SQL queries based on the uploaded dataset, its schema, and the user's business objective.
+
+The query generator must:
+
+1. Read the available table names and column names.
+2. Understand the requested business question.
+3. Select the appropriate SQL operations.
+4. Generate syntactically valid SQL for the configured database or query engine.
+5. Use the actual table and column names.
+6. Apply appropriate aggregations, filters, joins, grouping, date functions, and window functions when necessary.
+7. Explain what each query does in plain English.
+8. Execute the query against the selected data source.
+9. Display the result in a structured table.
+10. Allow users to copy, edit, and rerun queries.
+11. Display clear error messages and help correct invalid queries.
+12. Save queries alongside their dataset and analysis history where persistence is configured.
+
+Include the following interface elements:
+
+- SQL editor with syntax highlighting.
+- Generate SQL button.
+- Run Query button.
+- Clear Query button.
+- Copy Query button.
+- Query explanation.
+- Query results table.
+- Execution status.
+- Error output, when applicable.
+
+Support common SQL operations such as SELECT, WHERE, GROUP BY, ORDER BY, JOIN, CASE WHEN, CTEs, aggregate functions, and window functions.
+
+Use the SQL dialect appropriate to the configured query engine.
+
+For uploaded files, use a real SQL-capable execution engine, such as DuckDB in a browser-compatible implementation or a properly configured backend SQL database.
+
+Register uploaded datasets as queryable tables. Use consistent, safe table naming and map original column names correctly.
+
+For example, if the uploaded dataset contains employee records, the AI might generate:
+
+```sql
+SELECT
+    Department,
+    COUNT(*) AS Employee_Count
+FROM employees
+WHERE EmploymentStatus = 'Active'
+GROUP BY Department
+ORDER BY Employee_Count DESC;
+```
+
+This is an illustrative example only. The application must generate queries from the actual uploaded schema and must not assume that every dataset contains an employees table or these columns.
+
+### SQL security
+
+Treat all AI-generated SQL as untrusted until validated.
+
+For a read-only analytics application:
+- Permit approved read-only queries.
+- Reject destructive statements such as DROP, DELETE, UPDATE, INSERT, and ALTER unless explicitly implemented within a separately authorised data-management workflow.
+- Restrict access to permitted tables and columns.
+- Apply query timeouts and resource limits.
+- Avoid executing arbitrary database commands.
+- Use parameterised queries for user-provided filter values wherever applicable.
+
+Display a clear message when a query is blocked or cannot be executed.
+
+## 9. AI DATA ANALYST AGENT
+
+Create a conversational AI agent called "Ask AI".
+
+This agent must allow users to ask questions about the currently selected dataset, dashboard, and analysis in natural language.
+
+Examples:
+
+- What are the three most important findings in this dataset?
+- Which department has the highest employee attrition?
+- Why did expenditure increase during the reporting period?
+- Which locations have the lowest productivity?
+- Compare this month's results with the previous month.
+- Which employees have recorded unusually high absenteeism?
+- What factors are associated with employee turnover?
+- Write an SQL query to calculate the average salary by department.
+- What additional data would improve this analysis?
+- Recommend three practical actions based on these findings.
+
+### AI agent behaviour
+
+The agent must:
+
+1. Understand the user's question.
+2. Identify the relevant dataset, columns, filters, and metrics.
+3. Retrieve relevant information from the current dataset.
+4. Generate and execute a query or analytical calculation when necessary.
+5. Base numerical answers on actual query results.
+6. Explain findings in clear, concise business language.
+7. Include relevant figures, comparisons, and reporting periods.
+8. Identify limitations or missing information.
+9. Suggest useful follow-up questions where appropriate.
+10. Maintain conversational context for follow-up questions within the current analysis session.
+
+For example, if the user asks, "Which department has the highest attrition?", the agent should calculate attrition using a clearly defined formula and the available records, then identify the department with the highest valid rate.
+
+If the user follows up with "What is its average tenure?", the agent should understand which department "its" refers to.
+
+Do not rely solely on an AI language model to guess numerical results from a large dataset. Use actual data retrieval, SQL execution, or validated calculations.
+
+The agent must not claim to have accessed live data unless a live data source has actually been connected and queried.
+
+Provide a clean chat interface with:
+- A message input field.
+- Send button.
+- Suggested questions.
+- Conversation history.
+- Clear conversation option.
+- Relevant query or calculation details when useful.
+
+Keep answers concise by default, with an option for more detailed explanations.
+
+## 10. BUSINESS INSIGHTS AND RECOMMENDATIONS
+
+Include an "Insights & Recommendations" section beneath the dashboard or within a dedicated dashboard tab.
+
+The section should provide:
+
+### Key findings
+Summarise the most important results discovered in the data.
+
+### Trends and patterns
+Identify meaningful increases, decreases, seasonal patterns, and differences between groups.
+
+### Exceptions and anomalies
+Highlight unusual values, unexpected changes, missing information, and potential data quality issues.
+
+### Business risks
+Explain possible operational, financial, workforce, or performance risks supported by the data.
+
+### Recommendations
+Suggest practical actions that stakeholders can consider.
+
+### Supporting evidence
+For every significant finding, provide the metric, comparison, reporting period, or calculation that supports it.
+
+Clearly distinguish observed facts from hypotheses and recommendations.
+
+Do not present recommendations as guaranteed outcomes.
+
+## 11. DATA HISTORY AND WORKSPACE MANAGEMENT
+
+Create a Data History page where users can review previous analysis sessions.
+
+For each session, show:
+- Dataset or analysis name.
+- Date analysed.
+- Business objective.
+- Number of rows processed.
+- Analysis status.
+- Available dashboard.
+- Saved SQL queries.
+- Summary of findings.
+
+Allow users to reopen, rename, and delete analysis sessions, subject to the application's persistence and permissions.
+
+Provide options to download supported analysis outputs in CSV, Excel, or PDF format where the required export functionality has been implemented.
+
+Store only the information necessary for the application's functions.
+
+When a dataset is updated or replaced, clearly identify whether the dashboard and saved analysis are based on the latest data or an earlier version.
+
+Do not silently present stale results as current.
+
+## 12. LIVE DATA CONNECTIONS AND REFRESH
+
+Design the application so that it can support both uploaded files and connected data sources.
+
+For uploaded files:
+- Analyse the uploaded snapshot.
+- Provide a refresh or re-upload workflow.
+- Detect changes between file versions when possible.
+- Recalculate dependent KPIs and dashboards when the underlying data changes.
+
+For connected databases or APIs:
+- Create a modular data-source integration layer.
+- Allow authorised users to configure supported connections.
+- Retrieve updated records when the user refreshes the data or when a configured refresh schedule runs.
+- Show the last successful refresh time.
+- Display connection and refresh errors clearly.
+- Recalculate affected queries, KPIs, and charts after a successful refresh.
+
+Design the architecture to support future integrations with PostgreSQL, Supabase, REST APIs, and other appropriate sources.
+
+Do not treat Supabase as a live data source merely because it is connected. The application must query the actual database tables or API endpoints that contain the required records.
+
+Do not simulate real-time monitoring with a timer or repeated refresh of unchanged local data.
+
+If live connections are not yet configured, clearly label the workspace as using uploaded data.
+
+## 13. TECHNICAL ARCHITECTURE
+
+Use a modern, maintainable technology stack suitable for Google AI Studio application development.
+
+Preferred implementation:
+
+- Frontend: React with TypeScript.
+- Styling: Tailwind CSS or an equivalent clean component system.
+- Charts: Recharts or another reliable interactive charting library.
+- AI: Gemini API, using the appropriate available model and structured outputs or tool calling where suitable.
+- File parsing: Reliable Excel, CSV, and JSON parsing libraries.
+- SQL execution: DuckDB or another suitable query engine for uploaded files; PostgreSQL or a configured backend database for persistent data.
+- Backend: A secure server-side API for operations requiring credentials, database access, or sensitive processing.
+- Optional persistence: Supabase for authenticated users, analysis metadata, saved queries, and database-backed data workflows.
+
+Choose compatible library versions and implement the actual application logic rather than generating code that references nonexistent functions or services.
+
+### Architecture principles
+
+Separate the application into reusable components and services:
+
+1. File upload and parsing service.
+2. Schema detection and data profiling service.
+3. Data quality validation service.
+4. Business objective interpretation service.
+5. AI analysis orchestration service.
+6. SQL generation and execution service.
+7. KPI calculation service.
+8. Dashboard generation service.
+9. AI chat and data retrieval service.
+10. Data persistence and history service.
+11. Export service.
+12. Data-source integration service.
+
+Keep API keys, database credentials, and other secrets on the server side. Do not hardcode secrets into frontend code or expose them in browser responses.
+
+If a feature requires external configuration, provide a clear setup process and meaningful error messages.
+
+## 14. DATA PRIVACY AND ACCESS CONTROL
+
+Treat uploaded business data as confidential.
+
+Implement appropriate protections, including:
+- Secure handling of uploaded files.
+- Server-side secrets management.
+- Authentication when the application stores or accesses private business data.
+- Authorisation checks for protected datasets and analysis sessions.
+- Restrictions on which records the AI agent can retrieve.
+- Safe query execution.
+- Configurable retention and deletion of uploaded data.
+- Clear handling of failed uploads and processing errors.
+
+Do not expose sensitive employee or customer information unnecessarily.
+
+When analysing HR data, avoid displaying personal identifiers unless needed for a legitimate analytical purpose. Apply suitable access controls to employee-level information.
+
+Do not use uploaded data to train or fine-tune models unless a separate, explicit and appropriately authorised process has been configured.
+
+## 15. USER EXPERIENCE AND WORKFLOW
+
+The main workflow must be straightforward:
+
+Step 1: The user opens the application.
+
+Step 2: The user uploads an Excel, CSV, JSON, or other supported dataset.
+
+Step 3: The application previews the file and displays the data profile.
+
+Step 4: The user describes the business objective or problem.
+
+Step 5: The AI interprets the objective and identifies the relevant fields and KPIs.
+
+Step 6: The application generates the necessary SQL queries and executes them against the uploaded data.
+
+Step 7: The application generates an interactive dashboard based on the objective and query results.
+
+Step 8: The user reviews the key findings, data quality issues, and recommendations.
+
+Step 9: The user asks follow-up questions using the AI Data Analyst.
+
+Step 10: The user edits or reruns SQL queries, adjusts filters, refreshes the analysis, or exports the results.
+
+The interface should display clear loading states and progress messages during file processing, SQL execution, and dashboard generation.
+
+If a task fails, explain what failed and offer an appropriate recovery action.
+
+Do not display a completed status until the relevant operation has actually succeeded.
+
+## 16. FUNCTIONAL TESTING AND ACCEPTANCE CRITERIA
+
+Before considering the application complete, test the following scenarios:
+
+Test 1: Upload a valid Excel workbook and confirm that the worksheets, columns, data types, and preview are correct.
+
+Test 2: Upload a CSV file with different column names and verify that the application adapts to the new schema.
+
+Test 3: Upload a dataset unrelated to HR, such as sales or financial transactions, and confirm that the dashboard changes to match the business objective.
+
+Test 4: Enter a business objective and verify that the application generates relevant KPIs and charts from actual data.
+
+Test 5: Generate SQL and execute it against the uploaded dataset. Confirm that the displayed results match the underlying records.
+
+Test 6: Ask the AI agent a numerical question and verify its answer against an executed query or independently validated calculation.
+
+Test 7: Change a dashboard filter and confirm that all dependent visualisations and KPI cards update correctly.
+
+Test 8: Upload an invalid file and confirm that the application displays a useful error message.
+
+Test 9: Provide an objective that requires a missing column and confirm that the application explains the limitation instead of inventing a result.
+
+Test 10: Refresh or replace the uploaded dataset and confirm that the application correctly updates the analysis and identifies the new data version.
+
+Test 11: Attempt to execute a prohibited SQL statement and confirm that it is blocked.
+
+Test 12: Verify that API keys and private database credentials are not exposed in frontend code.
+
+Test 13: Confirm that the dashboard does not display hardcoded KPIs or fabricated results as real findings.
+
+Test 14: Verify that the application remains usable on different screen sizes.
+
+Test 15: Confirm that the analysis history, saved queries, and datasets persist across sessions when the relevant storage functionality has been configured.
+
+## 17. IMPLEMENTATION INSTRUCTIONS
+
+Build the application incrementally, prioritising the core end-to-end workflow.
+
+Implementation priorities:
+
+**Priority 1:** Functional file upload, parsing, schema detection, and data preview.
+
+**Priority 2:** Business objective input, AI interpretation, and data profiling.
+
+**Priority 3:** SQL generation, safe query execution, and validated calculations.
+
+**Priority 4:** Automatic interactive dashboard generation.
+
+**Priority 5:** AI Data Analyst chat that answers questions using actual data.
+
+**Priority 6:** Data history, exports, persistence, and live data integrations.
+
+Implement the first five priorities as a connected workflow, not as disconnected mock screens.
+
+Do not replace core functionality with sample data, static charts, simulated SQL execution, or placeholder AI responses.
+
+Where an integration cannot be completed without credentials or configuration, implement the supported parts, explain the remaining setup requirements, and avoid claiming that the integration is operational.
+
+After implementation, review the code for errors, missing components, inconsistent data handling, and nonfunctional controls. Fix the issues identified and verify the main workflow.
+
+## 18. FINAL DESIGN REQUIREMENT
+
+The finished application should look like a simple, modern business intelligence workspace.
+
+Use a white background, blue accents, and black or dark-grey text throughout.
+
+Keep the navigation minimal, the dashboard uncluttered, the charts readable, and the AI chat easy to use.
+
+Avoid unnecessary text, excessive menus, decorative cards, and complicated configuration screens.
+
+Every visible button must perform its stated action or clearly indicate that the required functionality has not yet been configured.
+
+**Final objective:** Deliver a functional, extensible AI analytics application that transforms uploaded business data into SQL queries, interactive dashboards, evidence-based insights, and conversational answers tailored to the user's business objectives.
